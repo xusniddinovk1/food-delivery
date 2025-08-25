@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 import environ
 import os
 from pathlib import Path
@@ -96,3 +98,39 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ]
+}
+
+SIMPLE_JWT = {
+    'ALGORITHM': 'HS256',
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=300),
+    'SLIDING_TOKEN__REFRESH_LIFETIME': timedelta(days=1),
+
+    "BLACKLIST_AFTER_ROTATION": True,
+}
+
+AUTHENTICATION_BACKENDS = [
+    'users.authentication.PhoneNumberBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'JWT format: Bearer <token>',
+        }
+    },
+    'USE_SESSION_AUTH': False,
+}
