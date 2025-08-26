@@ -1,7 +1,10 @@
 from django.db import models
 
+from users.models import CustomUser
+
 
 class Restaurant(models.Model):
+    owner = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='restaurant')
     name = models.CharField(max_length=50)
     address = models.TextField()
     latitude = models.FloatField()
