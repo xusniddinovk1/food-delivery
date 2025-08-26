@@ -5,7 +5,8 @@ from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
-from rest_framework import status, generics
+from rest_framework import status
+from rest_framework import viewsets
 
 
 class LoginView(APIView):
@@ -38,10 +39,22 @@ class RegisterView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+class UserViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
 
-    def get_object(self):
-        return self.request.user
+    def list(self, request):
+        """ faqat bitta foydalanuvchini qaytaradi (o‘zi) """
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        """ foydalanuvchining profilini yangilash """
+        serializer = UserSerializer(request.user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def destroy(self, request, pk=None):
+        """ foydalanuvchini o‘chirish """
+        request.user.delete()
+        return Response(status=204)
