@@ -34,7 +34,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class LoginSerializer(serializers.Serializer):
-    phone_number = serializers.CharField(max_length=13, phone_regex=[phone_regex])
+    phone_number = serializers.CharField(max_length=13, validators=[phone_regex])
     password = serializers.CharField(write_only=True)
 
     def validate(self, attrs):
