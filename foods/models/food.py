@@ -5,8 +5,8 @@ from .restaurant import Restaurant, Category
 class Food(models.Model):
     title = models.CharField(max_length=40)
     description = models.TextField()
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='foods')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='foods')
     price = models.PositiveIntegerField(default=0)
     is_available = models.BooleanField(default=True)
     prep_to_min = models.PositiveIntegerField(default=15) # how much time meal cook
