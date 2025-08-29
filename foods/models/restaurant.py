@@ -8,7 +8,6 @@ class Restaurant(models.Model):
     address = models.TextField()
     latitude = models.FloatField()
     longitude = models.FloatField()
-    prep_to_min = models.PositiveIntegerField(default=15) # how much time meal cook
     is_open = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

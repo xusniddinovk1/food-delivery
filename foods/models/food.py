@@ -9,6 +9,7 @@ class Food(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price = models.PositiveIntegerField(default=0)
     is_available = models.BooleanField(default=True)
+    prep_to_min = models.PositiveIntegerField(default=15) # how much time meal cook
     stock = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
