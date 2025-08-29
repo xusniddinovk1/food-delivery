@@ -1,5 +1,4 @@
 from rest_framework import viewsets
-
 from .permissions import IsRestaurantOwner
 from .serializers import RestaurantSerializer, CategorySerializer, FoodSerializer
 from .models import Restaurant, Category, Food
