@@ -29,10 +29,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, IsRestaurantOwner]
 
     def get_queryset(self):
-        return Category.objects.filter(restaurant=self.request.user.restaurant)
+        return Category.objects.filter(owner=self.request.user.restaurant)
 
     def perform_create(self, serializer):
-        serializer.save(restaurant=self.request.user.restaurant)
+        serializer.save(owner=self.request.user.restaurant)
 
 
 class FoodViewSet(viewsets.ModelViewSet):
@@ -40,10 +40,10 @@ class FoodViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, IsRestaurantOwner]
 
     def get_queryset(self):
-        return Food.objects.filter(restaurant=self.request.user.restaurant)
+        return Food.objects.filter(owner=self.request.user.restaurant)
 
     def perform_create(self, serializer):
-        serializer.save(restaurant=self.request.user.restaurant)
+        serializer.save(owner=self.request.user.restaurant)
 
 
 class RestaurantViewSet(viewsets.ModelViewSet):
