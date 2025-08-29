@@ -42,3 +42,14 @@ class FoodViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(restaurant=self.request.user.restaurant)
+
+
+class RestaurantViewSet(viewsets.ModelViewSet):
+    serializer_class = RestaurantSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Restaurant.objects.filter(owner=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
