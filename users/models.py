@@ -45,6 +45,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
+    restaurant = models.OneToOneField(
+        "foods.Restaurant",
+        on_delete=models.CASCADE,
+        null=True, blank=True,
+        related_name="owner"
+    )
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'phone_number'
