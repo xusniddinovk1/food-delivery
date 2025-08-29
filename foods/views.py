@@ -1,4 +1,6 @@
 from rest_framework import viewsets
+
+from .permissions import IsRestaurantOwner
 from .serializers import RestaurantSerializer, CategorySerializer, FoodSerializer
 from .models import Restaurant, Category, Food
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -24,7 +26,7 @@ class PublicRestaurantViewSet(viewsets.ReadOnlyModelViewSet):
 
 class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsRestaurantOwner]
 
     def get_queryset(self):
         return Category.objects.filter(restaurant=self.request.user.restaurant)
@@ -35,7 +37,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 class FoodViewSet(viewsets.ModelViewSet):
     serializer_class = FoodSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsRestaurantOwner]
 
     def get_queryset(self):
         return Food.objects.filter(restaurant=self.request.user.restaurant)
@@ -46,7 +48,7 @@ class FoodViewSet(viewsets.ModelViewSet):
 
 class RestaurantViewSet(viewsets.ModelViewSet):
     serializer_class = RestaurantSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsRestaurantOwner]
 
     def get_queryset(self):
         return Restaurant.objects.filter(owner=self.request.user)
