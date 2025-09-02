@@ -1,5 +1,5 @@
 from django.db import transaction
-from .models import Order, OrderItem, Cart, CartItem
+from .models import Order, OrderItem, Cart
 
 
 @transaction.atomic
