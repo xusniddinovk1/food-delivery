@@ -1,5 +1,6 @@
 from django.db import models
 from foods.models import Food, Restaurant
+
 from users.models import CustomUser, phone_regex
 
 
@@ -8,7 +9,7 @@ class Cart(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Cart of {self.customer}'
+        return f'Cart of {self.customer.phone_number}'
 
 
 class CartItem(models.Model):
@@ -33,7 +34,7 @@ class Order(models.Model):
         CANCELED = 'CANCELED', 'Canceled'
 
     customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='orders')
-    phone_number = models.CharField(max_length=13, validators=[phone_regex], unique=True)
+    phone_number = models.CharField(max_length=13, validators=[phone_regex])
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='orders')
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
     created_at = models.DateTimeField(auto_now_add=True)
