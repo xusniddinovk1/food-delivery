@@ -1,5 +1,5 @@
 from rest_framework.permissions import BasePermission
-from foods.models import Restaurant
+from apps.foods.models import Restaurant
 
 
 class IsRestaurantOwner(BasePermission):

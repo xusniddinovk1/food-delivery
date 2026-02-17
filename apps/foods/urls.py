@@ -1,9 +1,9 @@
-from django.urls import path, include
+from django.urls import include
 from .views import RestaurantViewSet, CategoryViewSet, FoodViewSet, PublicRestaurantViewSet, PublicCategoryViewSet, \
     PublicFoodViewSet
 from rest_framework.routers import DefaultRouter
 from django.urls import path
-from orders.views import (
+from apps.orders.views import (
     CartView, RemoveFromCartView,
     CreateOrderView, OrderListView, OrderDetailView
 )

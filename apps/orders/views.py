@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import permissions
 from .models import Cart, CartItem, OrderItem, Order
 from .serializers import CartSerializer, OrderSerializer
-from foods.models import Food
+from apps.foods.models import Food
 from rest_framework.generics import DestroyAPIView, GenericAPIView, ListAPIView, RetrieveAPIView
 
 

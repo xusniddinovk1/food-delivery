@@ -1,5 +1,5 @@
 from django.contrib.auth.backends import ModelBackend
-from users.models import CustomUser
+from apps.users.models import CustomUser
 
 
 class PhoneNumberBackend(ModelBackend):

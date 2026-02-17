@@ -1,6 +1,6 @@
 from django.db import models
-from foods.models import Food, Restaurant
-from users.models import CustomUser, phone_regex
+from apps.foods.models import Food, Restaurant
+from apps.users.models import CustomUser, phone_regex
 
 
 class Cart(models.Model):
